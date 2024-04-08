@@ -1,0 +1,44 @@
+public class Expense
+{
+    public int Id { get; set; }
+    public string Description { get; set; }
+    public decimal Amount { get; set; }
+    public DateTime Date { get; set; }
+}
+public class Budget
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal TotalAmount { get; set; }
+    public List<Expense> Expenses { get; set; }
+}
+public class User
+{
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public string Email { get; set; }
+}
+public class BudgetTracker
+{
+    private List<Budget> budgets;
+    private List<User> users;
+
+    public BudgetTracker()
+    {
+        budgets = new List<Budget>();
+        users = new List<User>();
+    }
+    public void AddBudget(Budget budget)
+    {
+        budgets.Add(budget);
+    }
+
+    public void AddExpenseToBudget(int budgetId, Expense expense)
+    {
+        var budget = budgets.FirstOrDefault(b => b.Id == budgetId);
+        if (budget != null)
+        {
+            budget.Expenses.Add(expense);
+        }
+    }
+}
